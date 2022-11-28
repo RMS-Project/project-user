@@ -84,6 +84,45 @@ const user = {
       });
   },
 
+  login: async(request, response) => {
+    const { email, password } = request.body;
+
+    const user = await getUser({ email }, [
+      "id",
+      "name",
+      "email",
+      "password"
+    ]);
+
+    console.log(user)
+
+    // Verifica se o usuário foi encontrado.
+    /*if (user.length == 0) {
+      // 400 - Bad request, usuário não existe.
+      return response.status(400).json("Email ou senha inválidos.");
+    }*/
+
+    // Verifica se a senha fornecida é igual a senha cadastrada no banco de dados.
+    // Somente o bcrypt vai saber dizer de a senha cadastrada é igual
+    // a senha fornecida.
+    if(!bcrypt.compareSync(password, user.password)) {
+      // 401 - nâo autorizado.
+      return response.status(401).json("Senha invalida")
+    }
+
+    // Encontrando o usuário gera um token e o retorna.
+    /*const token = pkg.sign(
+      {
+        id: rows[0].id,
+        email: rows[0].email,
+        name: rows[0].name,
+      },
+      secret.key
+    );
+    return response.status(200).json(token);*/
+
+  },
+
   list: async (request, response) => {
     const usersList = await User.findAll({
       attributes: ["id", "name", "email"],

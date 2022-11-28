@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b26973ff-3bba-49e3-9aa6-c81c6d77f3ef",
+		"_postman_id": "4683291a-0f93-41dd-b98e-f22d52affe76",
 		"name": "User control",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -78,6 +78,36 @@
 					"port": "3000",
 					"path": [
 						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"rms@localhost.com\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/news-api/v1/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"news-api",
+						"v1",
+						"login"
 					]
 				}
 			},
