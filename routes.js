@@ -6,12 +6,12 @@ import user from "./controllers/userControllers.js";
 
 const routes = express.Router(); 
 
-routes.get("/users", user.list);
+routes.get("/user", user.list);
 
 routes.post("/user", user.create);
 routes.post("/user/login", user.login)
 routes.get('/user/:id', user.read)
-routes.put("/user", user.update);
-routes.delete("/user", user.delete);
+routes.put("/user/:id", user.update);
+routes.delete("/user/:id", user.delete);
 
 export default routes

@@ -1,9 +1,9 @@
 {
   "type": "module",
   "scripts": {
-    "start": "nodemon index.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.mjs"
   },
+
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

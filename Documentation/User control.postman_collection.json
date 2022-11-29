@@ -11,13 +11,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/users",
+					"raw": "http://localhost:3000/user",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"users"
+						"user"
 					]
 				}
 			},
@@ -48,7 +49,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "9"
 						}
 					]
 				}
@@ -117,7 +118,13 @@
 			"name": "Update User",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"newName\": \"RodrigoMS\",\n    \"newEmail\": \"rms@localhost.com\",\n    \"newPassword\": \"123456789\",\n    \"newPasswordConfirm\": \"123456789\",\n    \"currentName\": \"Rodrigo\",\n    \"currentEmail\": \"rms@localhost.com\",\n    \"currentPassword\": \"123456789\"\n}",
@@ -128,14 +135,21 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/user",
+					"raw": "http://localhost:3000/user/:id",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"user"
+						"user",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "9"
+						}
 					]
 				}
 			},

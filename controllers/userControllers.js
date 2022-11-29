@@ -121,8 +121,8 @@ const user = {
     const token = pkg.sign(
       {
         id: user.id,
-        email: user.email,
         name: user.name,
+        email: user.email,
       },
       secret.key
     );
@@ -145,11 +145,18 @@ const user = {
       "email",
     ]);
 
+    if(user === null) {
+      return response.status(200).json("Usuário não encontrado.");
+    }
+
     return response.status(200).json(user);
   },
 
   update: async (request, response) => {
+  
     // ------ Dados do formulário ------
+    const idReq = request.params.id;
+
     const {
       newName,
       newEmail,
@@ -167,11 +174,15 @@ const user = {
     // ------ Dados atuais do usuário ------
     const currentData = await getUser(
       {
-        name: currentName,
-        email: currentEmail,
+        id: idReq,
+        email: currentEmail
       },
-      ["id", "password"]
-    );
+      ["id","password"]
+    )
+      .catch((err) => {
+        console.log(err)
+        return response.status(500).json("Algo deu errado.");
+      });
 
     // ------ Validações ------
 
@@ -247,10 +258,16 @@ const user = {
   },
 
   delete: async (request, response) => {
-    const { id, password } = request.body;
-    console.log(id, password);
+    const { id } = request.params
+    const { password } = request.body;
 
-    const user = await getUser({ id: id });
+    const user = await getUser({ 
+      id: id 
+    })
+
+    if (user === null) {
+      return response.status(204).json("Usuário não encontrado");
+    }
 
     // Verifica se a senha cadastrada é igual a senha informada.
     if (!bcrypt.compareSync(password, user.password)) {
